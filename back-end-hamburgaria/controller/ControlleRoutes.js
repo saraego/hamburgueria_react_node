@@ -1,18 +1,35 @@
 const uuid = require('uuid')
 const users = []
+const {Cliente} = require('../models')
 
 class ControlleRouter {
-    static index(req, res) {
-        res.json(users)
+    static async index(req, res) {
+        
+        try {
+            const clientesPedidos = await Cliente.findAll()
+            res.status(200).json(clientesPedidos)
+        } catch (error) {
+            
+        }
+        
     }
 
 
-    static user(req, res) {
-        const { name, pedido } = req.body
-        const novoUser = { id: uuid.v4(), name, pedido }
-        users.push(novoUser)
+    static async user(req, res) {
+       try {
+        
+        const clientes = await Cliente.create({
+            nome: req.body.nome,
+            pedido: req.body.pedido
+        })
 
-        res.status(201).json(novoUser)
+        res.status(200).json({
+            data:clientes
+        })
+
+       } catch (error) {
+        
+       }
     }
 
 
@@ -32,17 +49,17 @@ class ControlleRouter {
     }
 
 
-    static deleta(req,res){
-        const {id} = req.params
+    static async deleta(req,res){
+       try {
 
-        const index = users.findIndex(user=> user.id === id)
+        const cliente = await Cliente.findByPk(req.params.id)
+        await cliente.destroy()
 
-        if(index < 0){
-            return res.status(404).json({ "msg": "user not found" })
-        }
+        res.status(200).json({msg:"Usuario deletado"})
 
-        users.splice(index,1)
-        res.status(200).send("deletado")
+       } catch (error) {
+        
+       }
     }
 
 }
