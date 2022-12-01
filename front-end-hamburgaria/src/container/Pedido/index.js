@@ -45,7 +45,7 @@ function Pedido() {
                         <Li key={user.id}>
                             <div>
                                 <p>{user.pedido}</p>
-                                <LabelInput>{user.name}</LabelInput>
+                                <LabelInput>{user.nome}</LabelInput>
                             </div>
                             <button onClick={()=>deletar(user.id)} ><img src={Trash} alt="lixo" /></button>
                         </Li>
