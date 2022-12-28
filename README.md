@@ -14,6 +14,7 @@
 - [x] FrameWork express
 - [x] cors - para permite o uso da api
 - [x] dotenv - armazenamento da configuração no ambiente
+- [x] Sequelize e mysql2 - para banco de dados
 - [x] nodemon - para ajuda no desepenho de criação,  sem precisa atualizar manualmente
 - [x] uuid - para ajuda a cria key aleatorios
 
